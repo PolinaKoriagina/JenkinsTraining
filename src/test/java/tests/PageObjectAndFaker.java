@@ -30,7 +30,7 @@ public class PageObjectAndFaker extends TestBase {
 
     @Test
     void successfulSubmitForm() {
-        open("https://demoqa.com/automation-practice-form");
+        open(" ");
         //fill the form
         registrationPage.typeFirstName(firstName);
         registrationPage.typeLastName(lastName);
