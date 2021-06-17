@@ -8,6 +8,7 @@ import java.io.File;
 import java.util.Locale;
 
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.Allure.step;
 import static utils.RandomUtils.*;
 
 public class PageObjectAndFaker extends TestBase {
@@ -30,29 +31,48 @@ public class PageObjectAndFaker extends TestBase {
 
     @Test
     void successfulSubmitForm() {
-        open("https://demoqa.com/automation-practice-form");
+        step("Open students registration form", () -> {
+                    open("https://demoqa.com/automation-practice-form");
+                });
         //fill the form
+        step("Fill students registration form", () -> {
         registrationPage.typeFirstName(firstName);
         registrationPage.typeLastName(lastName);
         registrationPage.typeUserEmail(email);
         registrationPage.selectUserGender(gender);
         registrationPage.typeUserPhone(phoneNumber);
+        });
+        step("Set date", () -> {
         registrationPage.setDateOfBirth(day, month, year);
+        });
+        step("Set subjects", () -> {
         registrationPage.selectSubject("Co");
+        });
+        step("Set hobbies", () -> {
         registrationPage.selectHobby(hobby);
+        });
+        step("Upload image", () -> {
         registrationPage.uploadPicture(photoOfTheCat);
+        });
+        step("Set address", () -> {
         registrationPage.selectState(state);
         registrationPage.selectCity(city);
+        });
+        step("Submit form", () -> {
         registrationPage.clickSubmit();
-
+        });
         //check the form
+        step("Verify successful form submit", () -> {
         registrationPage.verifyAllFilledCorrect(firstName, lastName, email, gender, phoneNumber,
                 day, month, year, "Computer Science", hobby, "IMG_4209.jpeg", state, city);
+        });
 
+
+    }
 
 
     }
 
 
 
-}
+

@@ -21,7 +21,7 @@ public class TestBase {
 //        Attach.screenshotAs("Last screenshot");
 //        Attach.pageSource();
 //        Attach.browserConsoleLogs();
-        closeWebDriver();
+         closeWebDriver();
 
     //    Attach.addVideo(sessionId);
     }
