@@ -32,6 +32,7 @@ public class TestBase {
         Configuration.startMaximized = true;
         //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub/";
         Configuration.remote = remoteUrl;
+        System.out.println(remoteUrl);
     }
 
     //        String sessionId = getSessionId();
