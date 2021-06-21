@@ -19,7 +19,8 @@ public class TestBase {
         // choose size of browser, added Allure, added screenshot,
         // page sources, browser console logs, enabled Video,
         // added remote test running with Selenoid
-        final String remoteUrl = SystemPropertyReader.readProperty();
+        final String remoteUrl = SystemPropertyReader.getSelenoidUrl();
+        //final String remoteVideoUrl = SystemPropertyReader.getVideoUrl();
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
@@ -30,9 +31,8 @@ public class TestBase {
 
         Configuration.browserCapabilities = capabilities;
         Configuration.startMaximized = true;
-        //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub/";
         Configuration.remote = remoteUrl;
-        System.out.println(remoteUrl);
+        //Configuration.remote = remoteVideoUrl;
     }
 
     //        String sessionId = getSessionId();
@@ -49,7 +49,6 @@ public class TestBase {
 
         closeWebDriver();
 
-        //    Attach.addVideo(sessionId);
         Attach.addVideo(sessionId);
     }
 
