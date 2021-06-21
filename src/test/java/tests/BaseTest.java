@@ -14,27 +14,23 @@ import utils.SystemPropertyReader;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
-public class TestBase {
+public class BaseTest {
     @BeforeAll
     static void setUp() {
         // choose size of browser, added Allure, added screenshot,
         // page sources, browser console logs, enabled Video,
         // added remote test running with Selenoid
-        final String remoteUrl = SystemPropertyReader.getSelenoidUrl();
         final String login = CredentialManagerImpl.getCredConfig().getLogin();
         final String password = CredentialManagerImpl.getCredConfig().getPassword();
+        final String remoteUrl = SystemPropertyReader.getSelenoidUrl();
         final String selenoidUrl = String.format("https://%s:%s@%s", login, password, remoteUrl);
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-
         DesiredCapabilities capabilities = new DesiredCapabilities();
-
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
-
         Configuration.browserCapabilities = capabilities;
         Configuration.startMaximized = true;
-        // Configuration.remote = SystemPropertyReader.getSelenoidUrl();
         Configuration.remote = selenoidUrl + "/wd/hub/";
 
     }
@@ -50,9 +46,7 @@ public class TestBase {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
-
         closeWebDriver();
-
         Attach.addVideo(sessionId);
     }
 

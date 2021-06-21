@@ -8,7 +8,6 @@ import org.aeonbits.owner.Config;
         "system:properties",
         "classpath:config/credentials.properties"
 })
-
 public interface CredentialsConfig extends Config {
 
     @Key("login")

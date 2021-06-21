@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 import static utils.RandomUtils.*;
 
-public class PageObjectAndFaker extends TestBase {
+public class PageObjectAndFaker extends BaseTest {
 
     Faker faker = new Faker(new Locale("pl"));
     RegistrationPage registrationPage = new RegistrationPage();
