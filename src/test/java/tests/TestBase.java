@@ -8,6 +8,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import utils.CredentialManagerImpl;
 import utils.SystemPropertyReader;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
@@ -20,7 +21,9 @@ public class TestBase {
         // page sources, browser console logs, enabled Video,
         // added remote test running with Selenoid
         final String remoteUrl = SystemPropertyReader.getSelenoidUrl();
-        //final String remoteVideoUrl = SystemPropertyReader.getVideoUrl();
+        final String login = CredentialManagerImpl.getCredConfig().getLogin();
+        final String password = CredentialManagerImpl.getCredConfig().getPassword();
+        final String selenoidUrl = String.format("https://%s:%s@%s", login, password, remoteUrl);
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
@@ -31,8 +34,9 @@ public class TestBase {
 
         Configuration.browserCapabilities = capabilities;
         Configuration.startMaximized = true;
-        Configuration.remote = remoteUrl;
-        //Configuration.remote = remoteVideoUrl;
+        // Configuration.remote = SystemPropertyReader.getSelenoidUrl();
+        Configuration.remote = selenoidUrl + "/wd/hub/";
+
     }
 
     //        String sessionId = getSessionId();
